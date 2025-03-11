@@ -1,3 +1,12 @@
+# PDF表格转Excel工具 - 完整实现方案
+
+下面是使用PyInstaller和PySimpleGUI创建PDF表格转Excel工具的完整方案。我会提供完整代码和详细的实现步骤。
+
+## 1. 完整源代码
+
+创建一个名为`pdf_table_converter.py`的文件，复制以下代码:
+
+```python
 import PySimpleGUI as sg
 import os
 import sys
@@ -183,49 +192,31 @@ def check_java_installation():
         return False
 
 def main():
-    # 设置颜色主题（避免使用theme函数）
-    sg.change_look_and_feel('LightBlue')  # 使用change_look_and_feel替代theme
+    # 设置主题
+    sg.theme('LightBlue2')
     
     # 检查Java
     if not check_java_installation():
         sg.popup_error('错误: 未检测到Java环境!\n\n此应用需要Java才能运行。\n请安装Java后再运行本程序。\n\n可以从 https://www.java.com 下载安装Java。', title='Java未安装')
     
-    # 优化：添加应用图标（如果有）
-    app_icon = None
-    if os.path.exists("icon.ico"):
-        app_icon = "icon.ico"
-    
-    # 优化：界面布局，调整为更现代的布局
+    # 界面布局
     layout = [
-        [sg.Text('PDF表格转Excel工具', font=('Any', 20, 'bold'), justification='center', pad=(0, 10), size=(40, 1))],
-        [sg.Text('将PDF文件中的表格快速提取并转换为Excel格式', justification='center', pad=(0, 15), size=(40, 1))],
-        [sg.HSeparator()],
-        [sg.Frame('文件选择', [
-            [sg.Text('选择PDF文件:', size=(15, 1)), 
-             sg.Input(key='-FILE-', enable_events=True, size=(45, 1)), 
-             sg.FileBrowse('浏览', file_types=(("PDF文件", "*.pdf"),))],
-            [sg.Text('输出Excel文件:', size=(15, 1)), 
-             sg.Input(key='-OUTPUT-', enable_events=True, size=(45, 1)), 
-             sg.SaveAs('选择位置', file_types=(("Excel文件", "*.xlsx"),))]
-        ], pad=(0, 15))],
-        [sg.Frame('处理状态', [
-            [sg.Text('进度:')],
-            [sg.ProgressBar(100, orientation='h', size=(50, 20), key='-PROGRESS-')],
-            [sg.Text('0%', key='-PERCENT-', size=(5, 1)), sg.Push(), sg.Text('找到表格: 0', key='-TABLES-')],
-            [sg.Multiline(key='-STATUS-', disabled=True, size=(65, 5), autoscroll=True, background_color='#F0F0F0')]
-        ], pad=(0, 15))],
-        [sg.Push(), 
-         sg.Button('开始转换', key='-CONVERT-', disabled=True, size=(15, 1), font=('Any', 10, 'bold')),
-         sg.Button('取消', key='-CANCEL-', disabled=True, size=(15, 1)),
-         sg.Button('退出', size=(15, 1)),
-         sg.Push()]
+        [sg.Text('PDF表格转Excel工具', font=('Any', 16), justification='center', expand_x=True)],
+        [sg.Text('本工具可将PDF文件中的表格提取并保存为Excel文件', justification='center', expand_x=True)],
+        [sg.HorizontalSeparator()],
+        [sg.Text('选择PDF文件:')],
+        [sg.Input(key='-FILE-', enable_events=True), sg.FileBrowse('浏览', file_types=(("PDF文件", "*.pdf"),))],
+        [sg.Text('输出Excel文件:')],
+        [sg.Input(key='-OUTPUT-', enable_events=True), sg.SaveAs('选择位置', file_types=(("Excel文件", "*.xlsx"),))],
+        [sg.Text('状态:')],
+        [sg.Multiline(key='-STATUS-', disabled=True, size=(65, 5), autoscroll=True)],
+        [sg.Text('进度:')],
+        [sg.ProgressBar(100, orientation='h', size=(40, 20), key='-PROGRESS-', expand_x=True)],
+        [sg.Text('0', key='-PERCENT-'), sg.Push(), sg.Text('找到表格: 0', key='-TABLES-')],
+        [sg.Button('开始转换', key='-CONVERT-', disabled=True), sg.Button('取消', key='-CANCEL-', disabled=True), sg.Push(), sg.Button('退出')]
     ]
     
-    # 创建窗口
-    window = sg.Window('PDF表格转Excel工具', layout, finalize=True, resizable=True, icon=app_icon, size=(700, 550))
-    
-    # 优化：记住上次使用的目录
-    last_dir = os.path.expanduser("~")
+    window = sg.Window('PDF表格转Excel工具', layout, finalize=True, resizable=True)
     
     # 状态变量
     conversion_thread = None
@@ -240,24 +231,8 @@ def main():
             break
             
         # 文件选择变化
-        if event == '-FILE-':
-            # 记住文件目录
-            if values['-FILE-']:
-                last_dir = os.path.dirname(values['-FILE-'])
-                
-                # 自动提供默认输出文件名
-                if not values['-OUTPUT-']:
-                    base_name = os.path.basename(values['-FILE-'])
-                    output_name = os.path.splitext(base_name)[0] + '.xlsx'
-                    output_path = os.path.join(last_dir, output_name)
-                    window['-OUTPUT-'].update(output_path)
-            
-            # 更新按钮状态
-            window['-CONVERT-'].update(disabled=not (values['-FILE-'] and values['-OUTPUT-']))
-            
-        # 输出文件变化
-        if event == '-OUTPUT-':
-            # 更新按钮状态
+        if event == '-FILE-' or event == '-OUTPUT-':
+            # 只有当输入和输出都有值时启用转换按钮
             window['-CONVERT-'].update(disabled=not (values['-FILE-'] and values['-OUTPUT-']))
         
         # 开始转换
@@ -284,12 +259,6 @@ def main():
                     sg.popup_error(f'无法创建输出目录: {str(e)}')
                     continue
             
-            # 检查输出文件是否已存在
-            if os.path.exists(output_path):
-                if not sg.popup_yes_no(f'文件 {os.path.basename(output_path)} 已存在，是否覆盖?', 
-                                      title='文件已存在') == 'Yes':
-                    continue
-                    
             # 重置状态
             window['-STATUS-'].update('')
             window['-PROGRESS-'].update(0)
@@ -328,27 +297,159 @@ def main():
         if conversion_thread and not conversion_thread.is_alive():
             window['-CONVERT-'].update(disabled=not (values['-FILE-'] and values['-OUTPUT-']))
             window['-CANCEL-'].update(disabled=True)
-            
-            # 添加完成后操作：询问是否打开输出目录
-            if os.path.exists(values['-OUTPUT-']) and not cancel_flag["cancel"]:
-                if sg.popup_yes_no('转换完成！是否打开输出文件所在目录?', title='转换完成') == 'Yes':
-                    # 打开文件所在目录
-                    output_dir = os.path.dirname(values['-OUTPUT-'])
-                    try:
-                        if sys.platform == 'win32':
-                            os.startfile(output_dir)
-                        elif sys.platform == 'darwin':  # macOS
-                            import subprocess
-                            subprocess.Popen(['open', output_dir])
-                        else:  # Linux
-                            import subprocess
-                            subprocess.Popen(['xdg-open', output_dir])
-                    except Exception as e:
-                        sg.popup_error(f'无法打开目录: {str(e)}')
-            
             conversion_thread = None
     
     window.close()
 
 if __name__ == '__main__':
-    main() 
+    main()
+```
+
+## 2. 实现步骤
+
+### 第1步：设置开发环境
+
+1. **安装Python**:
+   - 确保您安装了Python 3.8或更高版本
+   - 从[python.org](https://www.python.org/downloads/)下载并安装
+
+2. **创建并激活虚拟环境**:
+
+   **Windows**:
+   ```bash
+   # 创建虚拟环境
+   python -m venv pdfconverter-env
+   
+   # 激活虚拟环境
+   pdfconverter-env\Scripts\activate
+   ```
+
+   **Mac/Linux**:
+   ```bash
+   # 创建虚拟环境
+   python -m venv pdfconverter-env
+   
+   # 激活虚拟环境
+   source pdfconverter-env/bin/activate
+   ```
+
+3. **安装必要的库**:
+   ```bash
+   pip install PySimpleGUI tabula-py pandas openpyxl PyPDF2 pyinstaller
+   ```
+
+### 第2步：创建应用程序代码
+
+1. 创建`pdf_table_converter.py`文件，复制上面提供的完整代码
+2. 保存文件
+
+### 第3步：测试应用程序
+
+在打包前测试应用程序：
+```bash
+python pdf_table_converter.py
+```
+
+确保应用程序能正常运行且所有功能正常。
+
+### 第4步：使用PyInstaller打包应用程序
+
+#### Windows打包命令:
+
+```bash
+# 基本打包命令
+pyinstaller --onefile --windowed --name "PDF表格转Excel工具" --icon=NONE pdf_table_converter.py
+
+# 如果遇到问题，可以尝试添加更多选项
+pyinstaller --onefile --windowed --name "PDF表格转Excel工具" --add-data "venv/Lib/site-packages/tabula;tabula" --hidden-import pkg_resources.py2_warn --hidden-import jpype --icon=NONE pdf_table_converter.py
+```
+
+#### Mac打包命令:
+
+```bash
+# 基本打包命令
+pyinstaller --onefile --windowed --name "PDF表格转Excel工具" pdf_table_converter.py
+
+# 如果遇到问题，可以尝试添加更多选项
+pyinstaller --onefile --windowed --name "PDF表格转Excel工具" --add-data "pdfconverter-env/lib/python3.x/site-packages/tabula:tabula" --hidden-import jpype pdf_table_converter.py
+```
+
+### 第5步：创建分发包
+
+1. **找到生成的可执行文件**:
+   - Windows: 在`dist`目录下找到`PDF表格转Excel工具.exe`
+   - Mac: 在`dist`目录下找到`PDF表格转Excel工具.app`
+
+2. **创建发布包**:
+   - 创建一个包含以下内容的ZIP文件:
+     - 可执行文件
+     - README.txt (使用说明)
+     - LICENSE.txt (如适用)
+
+3. **编写README.txt**:
+```
+PDF表格转Excel工具
+
+功能:
+- 从PDF文件中提取表格并转换为Excel格式
+- 支持多页PDF文件
+- 显示详细进度和状态信息
+
+使用方法:
+1. 运行程序
+2. 点击"浏览"选择PDF文件
+3. 点击"选择位置"设置输出Excel文件位置
+4. 点击"开始转换"
+5. 等待处理完成
+
+要求:
+- Java运行环境 (JRE) - 如未安装，请从 https://www.java.com 下载
+
+问题排查:
+- 如果程序无法启动，请确保已安装Java
+- 对于大型PDF文件，处理可能需要较长时间
+```
+
+## 3. 常见问题及解决方案
+
+### Java依赖问题
+
+**问题**: 用户未安装Java
+**解决方案**: 程序启动时会检查Java安装，如果未安装会显示提示信息
+
+### 内存问题
+
+**问题**: 处理大型PDF时内存不足
+**解决方案**: 程序使用批处理方式逐页处理，减少内存占用
+
+### 打包问题
+
+**问题**: PyInstaller无法正确包含所有依赖
+**解决方案**: 使用`--add-data`和`--hidden-import`选项指定额外依赖
+
+## 4. 测试和验证
+
+1. 在目标平台(Windows/Mac)上安装生成的应用程序
+2. 测试各种PDF文件:
+   - 小型PDF (几页)
+   - 中型PDF (几十页)
+   - 大型PDF (上百页)
+3. 验证提取的表格是否正确
+
+## 5. 发布
+
+1. 在GitHub创建Release
+2. 上传Windows和Mac版本的安装包
+3. 提供详细的安装和使用说明
+
+## 总结
+
+这个完整的解决方案提供了:
+- 用户友好的界面
+- 详细的进度显示
+- 取消功能
+- 错误处理
+- 跨平台兼容性
+- 打包和部署指南
+
+按照上述步骤操作，您应该能够成功创建一个可分发的PDF表格转Excel工具，方便Windows和Mac用户使用。
