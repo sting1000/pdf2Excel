@@ -1,0 +1,27 @@
+# PDF表格转Excel工具配置文件
+
+app:
+  name: "PDF表格转Excel工具"
+  version: "2.0.0"
+  window_size: [800, 600]
+  theme: "default"
+
+processing:
+  batch_size: 10              # 每批处理的页数
+  max_workers: 4              # 并行处理的最大工作线程数
+  memory_threshold: 1000      # 内存使用阈值(MB)
+  timeout: 300                # 处理超时时间(秒)
+
+output:
+  excel_engine: "openpyxl"    # Excel引擎
+  sheet_name_prefix: "Table_" # 工作表名称前缀
+  max_sheet_name_length: 31   # 工作表名称最大长度
+
+ui:
+  update_interval: 100        # UI更新间隔(毫秒)
+  progress_precision: 1       # 进度显示精度
+
+logging:
+  level: "INFO"               # 日志级别
+  max_file_size: 10485760     # 日志文件最大大小(10MB)
+  backup_count: 5             # 日志文件备份数量 

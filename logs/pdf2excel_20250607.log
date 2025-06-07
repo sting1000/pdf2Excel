@@ -1,0 +1,49 @@
+2025-06-07 23:38:32 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-07 23:38:32 - PDF2Excel - INFO - Java检查成功: java
+2025-06-07 23:38:32 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 6.48GB
+2025-06-07 23:38:32 - PDF2Excel - INFO - 磁盘可用空间: 93.41GB
+2025-06-07 23:38:41 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-07 23:38:41 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-07 23:38:41 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-07 23:38:41 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-07 23:38:41 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-07 23:38:41 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-07 23:40:30 - PDF2Excel - INFO - 开始环境检查...
+2025-06-07 23:40:30 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-07 23:40:30 - PDF2Excel - INFO - Java检查成功: java
+2025-06-07 23:40:30 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 5.91GB
+2025-06-07 23:40:30 - PDF2Excel - INFO - 磁盘可用空间: 93.41GB
+2025-06-07 23:40:31 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-07 23:40:31 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-07 23:40:31 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-07 23:40:31 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-07 23:40:31 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-07 23:40:31 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-07 23:40:31 - PDF2Excel - INFO - 环境检查完成
+2025-06-07 23:40:31 - PDF2Excel - ERROR - GUI模块导入失败: No module named 'src.gui.tkinter_gui'
+2025-06-07 23:40:42 - PDF2Excel - INFO - 开始环境检查...
+2025-06-07 23:40:42 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-07 23:40:42 - PDF2Excel - INFO - Java检查成功: java
+2025-06-07 23:40:42 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 5.81GB
+2025-06-07 23:40:42 - PDF2Excel - INFO - 磁盘可用空间: 93.40GB
+2025-06-07 23:40:42 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-07 23:40:42 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-07 23:40:42 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-07 23:40:42 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-07 23:40:42 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-07 23:40:42 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-07 23:40:42 - PDF2Excel - INFO - 环境检查完成
+2025-06-07 23:40:42 - PDF2Excel - ERROR - GUI模块导入失败: No module named 'src.gui.tkinter_gui'
+2025-06-07 23:42:10 - PDF2Excel - INFO - 开始环境检查...
+2025-06-07 23:42:10 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-07 23:42:10 - PDF2Excel - INFO - Java检查成功: java
+2025-06-07 23:42:10 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 5.24GB
+2025-06-07 23:42:10 - PDF2Excel - INFO - 磁盘可用空间: 94.40GB
+2025-06-07 23:42:11 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-07 23:42:11 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-07 23:42:11 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-07 23:42:11 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-07 23:42:11 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-07 23:42:11 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-07 23:42:11 - PDF2Excel - INFO - 环境检查完成
+2025-06-07 23:42:11 - PDF2Excel - ERROR - GUI模块导入失败: No module named 'src.gui.tkinter_gui'

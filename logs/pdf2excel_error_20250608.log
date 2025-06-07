@@ -1,0 +1,17 @@
+2025-06-08 03:06:02 - PDF2Excel - ERROR - GUI运行失败: Too early to create variable: no default root window
+Traceback (most recent call last):
+  File "/Users/zhechensu/Projects/pdf2Excel/main.py", line 66, in run_gui
+    from src.gui.tkinter_gui import TkinterGUI
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/__init__.py", line 9, in <module>
+    from .tkinter_gui import TkinterGUI
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/tkinter_gui.py", line 494, in <module>
+    tkinter_gui = TkinterGUI()
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/tkinter_gui.py", line 30, in __init__
+    self.pdf_path = tk.StringVar()
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 540, in __init__
+    Variable.__init__(self, master, value, name)
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 371, in __init__
+    master = _get_default_root('create variable')
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 297, in _get_default_root
+    raise RuntimeError(f"Too early to {what}: no default root window")
+RuntimeError: Too early to create variable: no default root window

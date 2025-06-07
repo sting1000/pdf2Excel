@@ -1,0 +1,52 @@
+2025-06-08 03:05:56 - PDF2Excel - INFO - 开始环境检查...
+2025-06-08 03:05:56 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-08 03:05:57 - PDF2Excel - INFO - Java检查成功: java
+2025-06-08 03:05:57 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 4.50GB
+2025-06-08 03:05:57 - PDF2Excel - INFO - 磁盘可用空间: 90.89GB
+2025-06-08 03:06:01 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-08 03:06:02 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-08 03:06:02 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-08 03:06:02 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-08 03:06:02 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-08 03:06:02 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-08 03:06:02 - PDF2Excel - INFO - 环境检查完成
+2025-06-08 03:06:02 - PDF2Excel - ERROR - GUI运行失败: Too early to create variable: no default root window
+Traceback (most recent call last):
+  File "/Users/zhechensu/Projects/pdf2Excel/main.py", line 66, in run_gui
+    from src.gui.tkinter_gui import TkinterGUI
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/__init__.py", line 9, in <module>
+    from .tkinter_gui import TkinterGUI
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/tkinter_gui.py", line 494, in <module>
+    tkinter_gui = TkinterGUI()
+  File "/Users/zhechensu/Projects/pdf2Excel/src/gui/tkinter_gui.py", line 30, in __init__
+    self.pdf_path = tk.StringVar()
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 540, in __init__
+    Variable.__init__(self, master, value, name)
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 371, in __init__
+    master = _get_default_root('create variable')
+  File "/Users/zhechensu/anaconda3/envs/pdf2excel/lib/python3.10/tkinter/__init__.py", line 297, in _get_default_root
+    raise RuntimeError(f"Too early to {what}: no default root window")
+RuntimeError: Too early to create variable: no default root window
+2025-06-08 03:06:42 - PDF2Excel - INFO - 开始环境检查...
+2025-06-08 03:06:42 - PDF2Excel - INFO - 开始系统环境检查...
+2025-06-08 03:06:42 - PDF2Excel - INFO - Java检查成功: java
+2025-06-08 03:06:42 - PDF2Excel - INFO - 系统内存: 总计 16.00GB, 可用 4.54GB
+2025-06-08 03:06:42 - PDF2Excel - INFO - 磁盘可用空间: 90.89GB
+2025-06-08 03:06:43 - PDF2Excel - INFO - 依赖检查成功: pandas v2.2.3
+2025-06-08 03:06:43 - PDF2Excel - INFO - 依赖检查成功: tabula v2.10.0
+2025-06-08 03:06:43 - PDF2Excel - INFO - 依赖检查成功: PyPDF2 v3.0.1
+2025-06-08 03:06:43 - PDF2Excel - INFO - 依赖检查成功: openpyxl v3.1.5
+2025-06-08 03:06:43 - PDF2Excel - INFO - 依赖检查成功: psutil v7.0.0
+2025-06-08 03:06:43 - PDF2Excel - INFO - ✅ 所有系统检查通过
+2025-06-08 03:06:43 - PDF2Excel - INFO - 环境检查完成
+2025-06-08 03:06:43 - PDF2Excel - INFO - TkinterGUI 初始化完成
+2025-06-08 03:06:44 - PDF2Excel - INFO - 主窗口创建完成
+2025-06-08 03:06:44 - PDF2Excel - INFO - 启动Tkinter GUI界面
+2025-06-08 03:07:30 - PDF2Excel - INFO - 用户选择PDF文件: /Users/zhechensu/Downloads/input_test.pdf
+2025-06-08 03:07:34 - PDF2Excel - INFO - 开始转换: /Users/zhechensu/Downloads/input_test.pdf -> /Users/zhechensu/Downloads/input_test.xlsx
+2025-06-08 03:07:34 - PDF2Excel - INFO - PDF文件 input_test.pdf 共有 21 页
+2025-06-08 03:07:34 - PDF2Excel - INFO - 使用批处理模式: 批大小=21, 总批次=1
+2025-06-08 03:07:39 - PDF2Excel - INFO - 开始保存 20 个表格到 /Users/zhechensu/Downloads/input_test.xlsx
+2025-06-08 03:07:40 - PDF2Excel - INFO - Excel文件保存成功: /Users/zhechensu/Downloads/input_test.xlsx
+2025-06-08 03:07:42 - PDF2Excel - INFO - 转换成功: 转换完成! 共处理 20 个表格
+2025-06-08 03:07:49 - PDF2Excel - INFO - 用户退出应用
